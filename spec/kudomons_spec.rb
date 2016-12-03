@@ -12,10 +12,15 @@ describe Kudomons do
     end
 
     it 'can add a kudomon to attribute' do
-      [mancharred, sourbulb, chikapu].each do |kudomon|
-        kudomons.add_kudomon(kudomon)
-      end
+      add_several_kudomons
       expect(kudomons.avialable_kudomons).to eq [mancharred, sourbulb, chikapu]
     end
   end
+
+  private
+    def add_several_kudomons
+      [mancharred, sourbulb, chikapu].each do |kudomon|
+        kudomons.add_kudomon(kudomon)
+      end
+    end
 end
