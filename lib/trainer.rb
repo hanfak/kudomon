@@ -1,11 +1,12 @@
 class Trainer
-  attr_reader :name, :position, :closest_kudomon
+  attr_reader :name, :position, :closest_kudomon, :captured_kudomons
 
   DEFAULT_POSITION_RANGE = [10, 10]
 
   def initialize(name, max_range = DEFAULT_POSITION_RANGE)
     @name   = name
     @position  = random_position(max_range)
+    @captured_kudomons = []
   end
 
   def find_distance(kudomon)
@@ -18,6 +19,10 @@ class Trainer
     @closest_kudomon = kudomons.available_kudomons.inject do |closests, kudomon|
       find_distance(kudomon) < find_distance(closests) ? kudomon : closests
     end
+  end
+
+  def capture_kudomon
+    @captured_kudomons << closest_kudomon
   end
 
   private

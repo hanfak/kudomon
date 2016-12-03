@@ -13,7 +13,7 @@ p trainer
 p kudomons
 trainer.find_closest_kudomon(kudomons)
 p trainer.closest_kudomon
-# trainer.capture_kudomon
-# trainer.captured_kudomons
+trainer.capture_kudomon
+p trainer.captured_kudomons
 
  trainer.find_closest_kudomon(empty_kudomons)

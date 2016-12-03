@@ -1,6 +1,11 @@
 describe Trainer do
   subject(:trainer) { described_class.new( "Han" ) }
 
+  let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
+  let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
+  let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
+  let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
+
   describe "#initialize" do
     it 'has a name' do
       expect(trainer.name).to eq "Han"
@@ -37,28 +42,26 @@ describe Trainer do
 
     it 'calculates the shortest distance using pythagoras same axis' do
       allow(Kernel).to receive(:rand).and_return(4, 8)
+
       expect(trainer.find_distance(mancharred)).to eq 9
     end
 
     it 'calculates the shortest distance using pythagoras different axes' do
       allow(Kernel).to receive(:rand).and_return(1, 8)
+
       expect(trainer.find_distance(mancharred)).to eq 18
     end
   end
 
   describe "#find_closest_kudomon" do
-    let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
-    let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
     let(:pikabu) {double :Kudomon, name: :d, position: [6, 7]}
-    let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
-    let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
     let(:empty_kudomons) {double :Kudomons, available_kudomons: []}
-    let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu,chikapu]}
+    let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu, chikapu]}
 
     it 'returns the kudomon which is closest to trainer' do
       allow(Kernel).to receive(:rand).and_return(1, 1)
-
       trainer.find_closest_kudomon(kudomons)
+
       expect(trainer.closest_kudomon).to eq sourbulb
     end
 
@@ -69,9 +72,21 @@ describe Trainer do
 
     it 'returns the first kudomon if more than one kudomon equidistant to trainer' do
       allow(Kernel).to receive(:rand).and_return(1, 1)
-
       trainer.find_closest_kudomon(same_kudomons)
+
       expect(trainer.closest_kudomon).to eq pikabu
+    end
+  end
+
+  describe "#capture_kudomon" do
+
+    it 'stores the closest_kudomon' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+      trainer.find_closest_kudomon(kudomons)
+      trainer.capture_kudomon
+
+      expect(trainer.captured_kudomons).to eq [sourbulb]
+
     end
   end
 end
