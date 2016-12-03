@@ -49,9 +49,11 @@ describe Trainer do
   describe "#find_closest_kudomon" do
     let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
     let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
+    let(:pikabu) {double :Kudomon, name: :d, position: [6, 7]}
     let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
     let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
     let(:empty_kudomons) {double :Kudomons, available_kudomons: []}
+    let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu,chikapu]}
 
     it 'returns the kudomon which is closest to trainer' do
       allow(Kernel).to receive(:rand).and_return(1, 1)
@@ -62,7 +64,14 @@ describe Trainer do
 
     it 'raises error if no kudomons available' do
       message = 'No more kudomons available here'
-      expect{  trainer.find_closest_kudomon(empty_kudomons) }.to raise_error message
+      expect{trainer.find_closest_kudomon(empty_kudomons) }.to raise_error message
+    end
+
+    it 'returns the first kudomon if more than one kudomon equidistant to trainer' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+
+      trainer.find_closest_kudomon(same_kudomons)
+      expect(trainer.closest_kudomon).to eq pikabu
     end
   end
 end
