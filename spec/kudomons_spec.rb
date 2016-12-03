@@ -8,12 +8,12 @@ describe Kudomons do
 
     it 'can add a kudomon to attribute' do
       kudomons.add_kudomon(mancharred)
-      expect(kudomons.avialable_kudomons).to eq [mancharred]
+      expect(kudomons.available_kudomons).to eq [mancharred]
     end
 
     it 'can add a kudomon to attribute' do
       add_several_kudomons
-      expect(kudomons.avialable_kudomons).to eq [mancharred, sourbulb, chikapu]
+      expect(kudomons.available_kudomons).to eq [mancharred, sourbulb, chikapu]
     end
   end
 
