@@ -9,6 +9,7 @@ SimpleCov.start
 require './lib/kudomon.rb'
 require './lib/trainer.rb'
 require './lib/kudomons.rb'
+require './lib/geospace.rb'
 
 
 RSpec.configure do |config|
