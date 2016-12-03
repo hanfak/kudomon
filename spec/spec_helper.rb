@@ -6,7 +6,7 @@ Coveralls.wear!
 SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 SimpleCov.start
 
-# require './lib/<>.rb'
+require './lib/kudomon.rb'
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
