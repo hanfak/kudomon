@@ -8,4 +8,8 @@ class Kudomons
   def add_kudomon(a_kudomon)
     @available_kudomons << a_kudomon
   end
+
+  def remove(a_kudomon)
+    @available_kudomons.delete a_kudomon
+  end
 end

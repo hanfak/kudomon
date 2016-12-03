@@ -7,7 +7,7 @@ describe Trainer do
   let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
   let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
   let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
-  let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
+  let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred], remove: nil}
 
   describe "#initialize" do
     it 'has a name' do
@@ -51,9 +51,14 @@ describe Trainer do
     it 'stores the closest_kudomon' do
       allow(space).to receive(:find_distance).and_return(61,25, 128)
       trainer.find_closest_kudomon(kudomons)
-      trainer.capture_kudomon
+      trainer.capture_kudomon(kudomons)
 
       expect(trainer.captured_kudomons).to eq [sourbulb]
+    end
+
+    it 'calls Kudomons to remove captured kudomon' do
+      expect(kudomons).to receive(:remove)
+      trainer.capture_kudomon(kudomons)
     end
   end
 end
