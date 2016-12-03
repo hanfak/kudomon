@@ -15,8 +15,12 @@ empty_kudomons = Kudomons.new
 p trainer
 p kudomons
 trainer.find_closest_kudomon(kudomons)
+puts
 p trainer.closest_kudomon
+puts
 trainer.capture_kudomon
 p trainer.captured_kudomons
+puts
+p space.positions_occupied
 
  trainer.find_closest_kudomon(empty_kudomons)

@@ -1,14 +1,11 @@
 class Trainer
-  attr_reader :name, :closest_kudomon, :captured_kudomons
+  attr_reader :name, :closest_kudomon, :captured_kudomons, :position
 
   def initialize(name, geospace)
     @name   = name
     @geospace = geospace
     @captured_kudomons = []
-  end
-
-  def position
-    @geospace.random_position
+    @position = geospace.random_position
   end
 
   def find_distance(kudomon)

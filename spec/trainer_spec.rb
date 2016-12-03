@@ -13,12 +13,12 @@ describe Trainer do
     it 'has a name' do
       expect(trainer.name).to eq "Han"
     end
-  end
 
-  describe "#postion" do
-    it 'calls random_position when setting position of trainer' do
-      expect(space).to receive(:random_position)
-      trainer.position
+    describe "#postion" do
+      it 'calls random_position when setting position of trainer' do
+        expect(space).to receive(:random_position)
+        trainer.position
+      end
     end
   end
 

@@ -1,13 +1,9 @@
 class Kudomon
-  attr_reader :species, :type
+  attr_reader :species, :type, :position
 
   def initialize( species, type, geospace)
     @species        = species
     @type           = type
-    @geospace       = geospace
-  end
-
-  def position
-    @geospace.random_position
+    @position       = geospace.random_position
   end
 end
