@@ -6,8 +6,8 @@ require './lib/geospace.rb'
 
 space = Geospace.new
 trainer = Trainer.new("han", space)
-kudomon_1 = Kudomon.new( "Sourbulb" , "grass" )
-kudomon_2 = Kudomon.new( "pikabu" , "grass" )
+kudomon_1 = Kudomon.new( "Sourbulb" , "grass", space )
+kudomon_2 = Kudomon.new( "pikabu" , "grass", space )
 kudomons = Kudomons.new
 kudomons.add_kudomon kudomon_1
 kudomons.add_kudomon kudomon_2

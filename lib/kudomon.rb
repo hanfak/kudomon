@@ -1,19 +1,13 @@
 class Kudomon
-  attr_reader :species, :type, :position
-  
-  DEFAULT_POSITION_RANGE = [10, 10]
+  attr_reader :species, :type
 
-  def initialize( species,
-                  type,
-                  max_range = DEFAULT_POSITION_RANGE)
+  def initialize( species, type, geospace)
     @species        = species
     @type           = type
-    @position       = random_position(max_range)
+    @geospace       = geospace
   end
 
-  private
-    def random_position(max_range)
-      [Kernel.rand(1..max_range[0]),
-       Kernel.rand(1..max_range[1])]
-    end
+  def position
+    @geospace.random_position
+  end
 end
