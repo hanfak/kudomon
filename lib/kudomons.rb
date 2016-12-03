@@ -1,11 +1,11 @@
 class Kudomons
-  attr_reader :avialable_kudomons
+  attr_reader :available_kudomons
 
   def initialize
-    @avialable_kudomons = []
+    @available_kudomons = []
   end
 
   def add_kudomon(a_kudomon)
-    @avialable_kudomons << a_kudomon
+    @available_kudomons << a_kudomon
   end
 end

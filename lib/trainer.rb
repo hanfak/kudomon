@@ -13,8 +13,9 @@ class Trainer
     (position[1] - kudomon.position[1]).abs ** 2
   end
 
-  def find_closest_kudomon(available_kudomons)
-    @closest_kudomon = available_kudomons.inject do |closests, kudomon|
+  def find_closest_kudomon(kudomons)
+    raise 'No more kudomons available here' if kudomons.available_kudomons.empty?
+    @closest_kudomon = kudomons.available_kudomons.inject do |closests, kudomon|
       find_distance(kudomon) < find_distance(closests) ? kudomon : closests
     end
   end
