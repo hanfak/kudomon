@@ -1,12 +1,14 @@
 class Trainer
-  attr_reader :name, :position, :closest_kudomon, :captured_kudomons
+  attr_reader :name, :closest_kudomon, :captured_kudomons
 
-  DEFAULT_POSITION_RANGE = [10, 10]
-
-  def initialize(name, max_range = DEFAULT_POSITION_RANGE)
+  def initialize(name, geospace)
     @name   = name
-    @position  = random_position(max_range)
+    @geospace = geospace
     @captured_kudomons = []
+  end
+
+  def position
+    @geospace.random_position
   end
 
   def find_distance(kudomon)
@@ -24,10 +26,4 @@ class Trainer
   def capture_kudomon
     @captured_kudomons << closest_kudomon
   end
-
-  private
-    def random_position(max_range)
-      [Kernel.rand(1..max_range[0]),
-       Kernel.rand(1..max_range[1])]
-    end
 end

@@ -1,8 +1,11 @@
 require './lib/kudomon.rb'
 require './lib/trainer.rb'
 require './lib/kudomons.rb'
+require './lib/geospace.rb'
 
-trainer = Trainer.new("han")
+
+space = Geospace.new
+trainer = Trainer.new("han", space)
 kudomon_1 = Kudomon.new( "Sourbulb" , "grass" )
 kudomon_2 = Kudomon.new( "pikabu" , "grass" )
 kudomons = Kudomons.new

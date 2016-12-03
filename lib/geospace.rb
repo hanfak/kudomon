@@ -9,5 +9,4 @@ class Geospace
     [Kernel.rand(1..@max_range[0]),
      Kernel.rand(1..@max_range[1])]
   end
-
 end

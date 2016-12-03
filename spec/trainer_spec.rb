@@ -1,5 +1,8 @@
 describe Trainer do
-  subject(:trainer) { described_class.new( "Han" ) }
+  let(:space) {double :Geospace, random_position: [1,1]}
+  let(:space2) {double :Geospace, random_position: [1,8]}
+
+  subject(:trainer) { described_class.new( "Han", space ) }
 
   let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
   let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
@@ -10,46 +13,23 @@ describe Trainer do
     it 'has a name' do
       expect(trainer.name).to eq "Han"
     end
+  end
 
-    describe "#position" do
-      it 'has a position' do
-        allow(Kernel).to receive(:rand).and_return(4, 8)
-        expect(trainer.position).to eq [4,8]
-      end
-
-      it 'position lies between 1 and max range' do
-        max_x_range = 5
-        max_y_range = 9
-        trainer_2 = Trainer.new("Arya" ,  [max_x_range, max_y_range] )
-
-        500.times do
-          expect(trainer_2.position[0]).to be_between(1, max_x_range)
-          expect(trainer_2.position[1]).to be_between(1, max_y_range)
-        end
-      end
-
-      it 'has a default range' do
-        500.times do
-          expect(trainer.position[0]).to be_between(1, 10)
-          expect(trainer.position[1]).to be_between(1, 10)
-        end
-      end
+  describe "#postion" do
+    it 'calls random_position when setting position of trainer' do
+      expect(space).to receive(:random_position)
+      trainer.position
     end
   end
 
   describe "#find_distance" do
-    let(:mancharred) {double :Kudomon, position: [4,5]}
-
     it 'calculates the shortest distance using pythagoras same axis' do
-      allow(Kernel).to receive(:rand).and_return(4, 8)
-
-      expect(trainer.find_distance(mancharred)).to eq 9
+      trainer_1 = Trainer.new("han", space2)
+      expect(trainer_1.find_distance(mancharred)).to eq 65
     end
 
     it 'calculates the shortest distance using pythagoras different axes' do
-      allow(Kernel).to receive(:rand).and_return(1, 8)
-
-      expect(trainer.find_distance(mancharred)).to eq 18
+      expect(trainer.find_distance(mancharred)).to eq 128
     end
   end
 
@@ -59,7 +39,6 @@ describe Trainer do
     let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu, chikapu]}
 
     it 'returns the kudomon which is closest to trainer' do
-      allow(Kernel).to receive(:rand).and_return(1, 1)
       trainer.find_closest_kudomon(kudomons)
 
       expect(trainer.closest_kudomon).to eq sourbulb
@@ -71,7 +50,6 @@ describe Trainer do
     end
 
     it 'returns the first kudomon if more than one kudomon equidistant to trainer' do
-      allow(Kernel).to receive(:rand).and_return(1, 1)
       trainer.find_closest_kudomon(same_kudomons)
 
       expect(trainer.closest_kudomon).to eq pikabu
@@ -79,14 +57,11 @@ describe Trainer do
   end
 
   describe "#capture_kudomon" do
-
     it 'stores the closest_kudomon' do
-      allow(Kernel).to receive(:rand).and_return(1, 1)
       trainer.find_closest_kudomon(kudomons)
       trainer.capture_kudomon
 
       expect(trainer.captured_kudomons).to eq [sourbulb]
-
     end
   end
 end
