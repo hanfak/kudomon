@@ -7,6 +7,8 @@ SimpleCov.formatter = SimpleCov::Formatter::HTMLFormatter
 SimpleCov.start
 
 require './lib/kudomon.rb'
+require './lib/trainer.rb'
+
 
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate

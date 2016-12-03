@@ -1,6 +1,7 @@
 describe Kudomon do
+  subject(:kudomon) { described_class.new( "Sourbulb" , "grass" ) }
+
   describe "#initialize" do
-    subject(:kudomon) { described_class.new( "Sourbulb" , "grass" ) }
 
     it 'has a species' do
       expect(kudomon.species).to eq "Sourbulb"
