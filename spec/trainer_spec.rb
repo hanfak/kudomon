@@ -31,4 +31,18 @@ describe Trainer do
       end
     end
   end
+
+  describe "#find_distance" do
+    let(:mancharred) {double :Kudomon, position: [4,5]}
+
+    it 'calculates the shortest distance using pythagoras same axis' do
+      allow(Kernel).to receive(:rand).and_return(4, 8)
+      expect(trainer.find_distance(mancharred)).to eq 9
+    end
+
+    it 'calculates the shortest distance using pythagoras different axes' do
+      allow(Kernel).to receive(:rand).and_return(1, 8)
+      expect(trainer.find_distance(mancharred)).to eq 18
+    end
+  end
 end
