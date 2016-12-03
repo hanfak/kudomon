@@ -10,6 +10,9 @@ describe Kudomon do
       expect(kudomon.type).to eq "grass"
     end
 
-    it 'has a position'
+    it 'has a position' do
+      allow(Kernel).to receive(:rand).and_return(4, 8)
+      expect(kudomon.position).to eq [4,8]
+    end
   end
 end
