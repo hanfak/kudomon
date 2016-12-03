@@ -45,4 +45,18 @@ describe Trainer do
       expect(trainer.find_distance(mancharred)).to eq 18
     end
   end
+
+  describe "#find_closest_kudomon" do
+    let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
+    let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
+    let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
+    let(:kudomons) {double :Kudomons, avialable_kudomons: [ chikapu, sourbulb, mancharred]}
+
+    it 'returns the kudomon which is closest to trainer' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+
+      trainer.find_closest_kudomon(kudomons.avialable_kudomons)
+      expect(trainer.closest_kudomon).to eq sourbulb
+    end
+  end
 end
