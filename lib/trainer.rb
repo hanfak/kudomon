@@ -8,11 +8,6 @@ class Trainer
     @position = geospace.random_position
   end
 
-  def find_distance(kudomon)
-    (position[0] - kudomon.position[0]).abs ** 2 +
-    (position[1] - kudomon.position[1]).abs ** 2
-  end
-
   def find_closest_kudomon(kudomons)
     check_availabe_kudomons(kudomons)
     @closest_kudomon = select_kudomon(kudomons)

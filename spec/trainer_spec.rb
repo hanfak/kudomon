@@ -22,17 +22,6 @@ describe Trainer do
     end
   end
 
-  describe "#find_distance" do
-    it 'calculates the shortest distance using pythagoras same axis' do
-      trainer_1 = Trainer.new("han", space2)
-      expect(trainer_1.find_distance(mancharred)).to eq 65
-    end
-
-    it 'calculates the shortest distance using pythagoras different axes' do
-      expect(trainer.find_distance(mancharred)).to eq 128
-    end
-  end
-
   describe "#find_closest_kudomon" do
     let(:pikabu) {double :Kudomon, name: :d, position: [6, 7]}
     let(:empty_kudomons) {double :Kudomons, available_kudomons: []}
