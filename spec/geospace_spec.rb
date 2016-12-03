@@ -26,5 +26,18 @@ describe Geospace do
     end
   end
 
+  describe "#find_distance" do
+    let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
+    let(:trainer_1) {double :Trianer, position: [1,8]}
+    let(:trainer_2) {double :Trianer, position: [1,1]}
+
+    it 'calculates the shortest distance using pythagoras same axis' do
+      expect(space.find_distance(trainer_1, mancharred)).to eq 65
+    end
+
+    it 'calculates the shortest distance using pythagoras different axes' do
+      expect(space.find_distance(trainer_2, mancharred)).to eq 128
+    end
+  end
 
 end

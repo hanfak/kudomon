@@ -11,7 +11,7 @@ describe Kudomon do
     it 'has a type' do
       expect(kudomon.type).to eq "grass"
     end
-     
+
     describe '#position' do
       it 'calls random_position when setting position of kudonom' do
         expect(space).to receive(:random_position)
@@ -19,5 +19,4 @@ describe Kudomon do
       end
     end
   end
-
 end

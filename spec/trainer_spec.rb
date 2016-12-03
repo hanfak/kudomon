@@ -39,6 +39,7 @@ describe Trainer do
     let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu, chikapu]}
 
     it 'returns the kudomon which is closest to trainer' do
+      allow(space).to receive(:find_distance).and_return(61,25, 128)
       trainer.find_closest_kudomon(kudomons)
 
       expect(trainer.closest_kudomon).to eq sourbulb
@@ -50,6 +51,7 @@ describe Trainer do
     end
 
     it 'returns the first kudomon if more than one kudomon equidistant to trainer' do
+      allow(space).to receive(:find_distance).and_return(61,61)
       trainer.find_closest_kudomon(same_kudomons)
 
       expect(trainer.closest_kudomon).to eq pikabu
@@ -58,6 +60,7 @@ describe Trainer do
 
   describe "#capture_kudomon" do
     it 'stores the closest_kudomon' do
+      allow(space).to receive(:find_distance).and_return(61,25, 128)
       trainer.find_closest_kudomon(kudomons)
       trainer.capture_kudomon
 

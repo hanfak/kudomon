@@ -15,8 +15,10 @@ class Trainer
 
   def find_closest_kudomon(kudomons)
     raise 'No more kudomons available here' if kudomons.available_kudomons.empty?
-    @closest_kudomon = kudomons.available_kudomons.inject do |closests, kudomon|
-      find_distance(kudomon) < find_distance(closests) ? kudomon : closests
+
+    @closest_kudomon = kudomons.available_kudomons.min_by do
+      |kudomon|
+      @geospace.find_distance(self, kudomon)
     end
   end
 
