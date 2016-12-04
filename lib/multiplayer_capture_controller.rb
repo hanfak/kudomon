@@ -25,7 +25,7 @@ class MultiplayerCaptureController
     if a_trainer.closest_kudomon.hunter == a_trainer.name
       a_trainer.capture_kudomon
       get_kudomons.remove(a_trainer.closest_kudomon)
-      a_trainer.remove(a_trainer.closest_kudomon)
+      a_trainer.remove
     else
       raise 'you are not the hunter of this kudomon'
     end

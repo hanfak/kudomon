@@ -22,6 +22,7 @@ p ctrl.spot_kudomon(trainer_1)
 # p ctrl.spot_kudomon(trainer_3)
 p ctrl.initiate_capture(trainer_1, 2)
 puts
+ctrl.capture(trainer_1)
 puts
 p kudomons.available_kudomons[0]
 puts
