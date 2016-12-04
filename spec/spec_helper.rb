@@ -11,6 +11,7 @@ require './lib/trainer.rb'
 require './lib/kudomons.rb'
 require './lib/geospace.rb'
 require './lib/multiplayer_capture_controller.rb'
+require './lib/battle_controller.rb'
 
 
 
