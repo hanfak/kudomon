@@ -3,6 +3,8 @@ describe Kudomon do
 
   subject(:kudomon) { described_class.new( "Sourbulb" , "grass", space ) }
 
+  let(:trainer_1) {double :Trainer, name: "Han"}
+
   describe "#initialize" do
     it 'has a species' do
       expect(kudomon.species).to eq "Sourbulb"
@@ -17,6 +19,13 @@ describe Kudomon do
         expect(space).to receive(:random_position)
         kudomon.position
       end
+    end
+  end
+
+  describe '#stores_hunter' do
+    it 'stores the trainer that is hunting it' do
+      kudomon.stores_hunter(trainer_1)
+      expect(kudomon.hunter).to eq "Han"
     end
   end
 end
