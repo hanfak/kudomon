@@ -2,14 +2,14 @@ describe MultiplayerCaptureController do
   subject(:capture_ctlr) {described_class.new(kudomons, trainer_1,trainer_2)}
 
   let(:sourbulb) {double :Kudomon, position: [4,5]}
-  let(:chikapu) {double :Kudomon,  position: [6, 7]}
+  let(:chikapu) {double :Kudomon,  position: [6, 7], stores_hunter: nil,  hunter: nil}
   let(:mancharred) {double :Kudomon,  position: [9,9], hunter: "Noddy"}
   let(:pikabu) {double :Kudomon, position: [3,1], stores_hunter: nil, hunter: nil}
   let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
 
   let(:trainer_1) {double :Trainer, name: "han", position: [1,1], find_closest_kudomon: nil, closest_kudomon: pikabu}
   let(:trainer_2) {double :Trainer, position: [5,1] }
-  let(:trainer_3) {double :Trainer, position: [5,3] }
+  let(:trainer_3) {double :Trainer, position: [5,3], find_closest_kudomon: nil, closest_kudomon: chikapu}
 
   describe 'stores kudomons' do
     it 'initializes with a list of kudomons' do
@@ -50,19 +50,26 @@ describe MultiplayerCaptureController do
     it 'calls #stores_hunter' do
       capture_ctlr.spot_kudomon(trainer_1)
       expect(trainer_1).to receive(:closest_kudomon).and_return(pikabu)
-      capture_ctlr.initiate_capture(trainer_1)
+      allow(Kernel).to receive(:rand).and_return(4)
+      capture_ctlr.initiate_capture(trainer_1, 4)
     end
 
     it 'raises error if no kudomon spotted' do
       allow(trainer_1).to receive(:closest_kudomon).and_return nil
       message = 'No closest kudomon, find closest kudomon first'
-      expect{capture_ctlr.initiate_capture(trainer_1) }.to raise_error message
+      expect{capture_ctlr.initiate_capture(trainer_1, 1) }.to raise_error message
     end
 
     it 'raises error if no kudomon spotted' do
       allow(trainer_1).to receive(:closest_kudomon).and_return mancharred
       message = 'Cannot initiate capture, it already has a hunter'
-      expect{capture_ctlr.initiate_capture(trainer_1) }.to raise_error message
+      expect{capture_ctlr.initiate_capture(trainer_1, 1) }.to raise_error message
+    end
+
+    it 'does not store hunter if matches code' do
+      allow(Kernel).to receive(:rand).and_return(3)
+      capture_ctlr.initiate_capture(trainer_3, 4)
+      expect(trainer_3.closest_kudomon.hunter).to eq nil
     end
   end
 end
