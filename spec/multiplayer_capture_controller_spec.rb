@@ -91,7 +91,7 @@ describe MultiplayerCaptureController do
       end
 
       it 'removes closests kudomon from trainer' do
-        expect(trainer_2).to receive(:remove).with(trainer_2.closest_kudomon)
+        expect(trainer_2).to receive(:remove)
         capture_ctlr.capture(trainer_2)
       end
 
