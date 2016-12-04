@@ -51,14 +51,18 @@ describe Trainer do
     it 'stores the closest_kudomon' do
       allow(space).to receive(:find_distance).and_return(61,25, 128)
       trainer.find_closest_kudomon(kudomons)
-      trainer.capture_kudomon(kudomons)
+      trainer.capture_kudomon
 
       expect(trainer.captured_kudomons).to eq [sourbulb]
     end
+  end
 
-    it 'calls Kudomons to remove captured kudomon' do
-      expect(kudomons).to receive(:remove)
-      trainer.capture_kudomon(kudomons)
+  describe '#remove' do
+    it 'sets closest_kudomon to nil' do
+      allow(space).to receive(:find_distance).and_return(61,25, 128)
+      trainer.find_closest_kudomon(kudomons)
+      trainer.remove
+      expect(trainer.closest_kudomon).to eq nil
     end
   end
 end

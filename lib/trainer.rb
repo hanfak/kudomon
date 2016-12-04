@@ -13,9 +13,12 @@ class Trainer
     @closest_kudomon = select_kudomon(kudomons)
   end
 
-  def capture_kudomon(kudomons)
+  def capture_kudomon
     @captured_kudomons << closest_kudomon
-    kudomons.remove(closest_kudomon)
+  end
+
+  def remove
+    @closest_kudomon = nil
   end
 
   private
