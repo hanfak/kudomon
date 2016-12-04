@@ -13,7 +13,7 @@ class MultiplayerCaptureController
 
   def initiate_capture(a_trainer)
     raise 'No closest kudomon, find closest kudomon first' if a_trainer.closest_kudomon == nil
-    # if closest_kudomon has hunter raise err
+    raise 'Cannot initiate capture, it already has a hunter' unless a_trainer.closest_kudomon.hunter == nil
     a_trainer.closest_kudomon.stores_hunter(a_trainer)
   end
 end

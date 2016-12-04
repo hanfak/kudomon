@@ -1,5 +1,5 @@
 class Kudomon
-  attr_reader :species, :type, :position,:hunter
+  attr_reader :species, :type, :position, :hunter
 
   def initialize(species, type, geospace)
     @species        = species

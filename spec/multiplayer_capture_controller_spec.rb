@@ -3,13 +3,14 @@ describe MultiplayerCaptureController do
 
   let(:sourbulb) {double :Kudomon, position: [4,5]}
   let(:chikapu) {double :Kudomon,  position: [6, 7]}
-  let(:mancharred) {double :Kudomon,  position: [9,9]}
-  let(:pikabu) {double :Kudomon, position: [2,1], stores_hunter: nil}
+  let(:mancharred) {double :Kudomon,  position: [9,9], hunter: "Noddy"}
+  let(:pikabu) {double :Kudomon, position: [3,1], stores_hunter: nil, hunter: nil}
   let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred]}
 
-  let(:trainer_1) {double :Trainer, position: [1,1], find_closest_kudomon: nil, closest_kudomon: pikabu}
-  let(:trainer_2) {double :Trainer, position: [3,1] }
+  let(:trainer_1) {double :Trainer, name: "han", position: [1,1], find_closest_kudomon: nil, closest_kudomon: pikabu}
+  let(:trainer_2) {double :Trainer, position: [5,1] }
   let(:trainer_3) {double :Trainer, position: [5,3] }
+
   describe 'stores kudomons' do
     it 'initializes with a list of kudomons' do
       expect(capture_ctlr.get_kudomons).to eq kudomons
@@ -54,8 +55,13 @@ describe MultiplayerCaptureController do
 
     it 'raises error if no kudomon spotted' do
       allow(trainer_1).to receive(:closest_kudomon).and_return nil
-
       message = 'No closest kudomon, find closest kudomon first'
+      expect{capture_ctlr.initiate_capture(trainer_1) }.to raise_error message
+    end
+
+    it 'raises error if no kudomon spotted' do
+      allow(trainer_1).to receive(:closest_kudomon).and_return mancharred
+      message = 'Cannot initiate capture, it already has a hunter'
       expect{capture_ctlr.initiate_capture(trainer_1) }.to raise_error message
     end
   end
