@@ -4,8 +4,8 @@ class Trainer
   def initialize(name, geospace)
     @name   = name
     @geospace = geospace
-    @captured_kudomons = []
     @position = geospace.random_position
+    @captured_kudomons = []
   end
 
   def find_closest_kudomon(kudomons)

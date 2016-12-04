@@ -24,6 +24,30 @@ describe Geospace do
         expect(space.random_position[1]).to be_between(1, 10)
       end
     end
+
+    it 'stores different positions' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+      space.random_position
+      allow(Kernel).to receive(:rand).and_return(2, 2)
+      space.random_position
+      expect(space.taken_positions).to eq [[1,1], [2,2]]
+    end
+
+    it 'does not store different position' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+      space.random_position
+      allow(Kernel).to receive(:rand).and_return(1, 1,3,3)
+      space.random_position
+      expect(space.taken_positions).not_to eq [[1,1],[1,1]]
+    end
+
+    it 'position exist, create new one' do
+      allow(Kernel).to receive(:rand).and_return(1, 1)
+      space.random_position
+      allow(Kernel).to receive(:rand).and_return(1, 1, 4, 3)
+      space.random_position
+      expect(space.taken_positions).to eq [[1,1],[4,3]]
+    end
   end
 
   describe "#find_distance" do

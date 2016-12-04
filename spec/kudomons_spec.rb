@@ -4,8 +4,8 @@ describe Kudomons do
   let(:mancharred) {double :Kudomon}
   let(:sourbulb) {double :Kudomon}
   let(:chikapu) {double :Kudomon}
-  describe '#add_kudomon' do
 
+  describe '#add_kudomon' do
     it 'can add a kudomon to attribute' do
       kudomons.add_kudomon(mancharred)
       expect(kudomons.available_kudomons).to eq [mancharred]
