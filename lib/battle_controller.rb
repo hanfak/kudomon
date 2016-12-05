@@ -16,13 +16,9 @@ class BattleController
   def fight
     kudomon_to_fight = choose_order
     kudomon_to_fight[0].attack(kudomon_to_fight[1])
-    if kudomon_to_fight[1].health_points <= 0
-      return "#{kudomon_to_fight[0].hunter} won with #{kudomon_to_fight[0].species}"
-    end
+    return winner_message(1, kudomon_to_fight) if kudomon_to_fight[1].health_points <= 0
     kudomon_to_fight[1].attack(kudomon_to_fight[0])
-    if kudomon_to_fight[0].health_points <= 0
-      return "#{kudomon_to_fight[1].hunter} won with #{kudomon_to_fight[1].species}"
-    end
+    return winner_message(0, kudomon_to_fight) if kudomon_to_fight[0].health_points <= 0
   end
 
   private
@@ -32,5 +28,10 @@ class BattleController
 
     def pick_first_attacker
       Kernel.rand(0..1)
+    end
+
+    def winner_message(winner, kudomon_to_fight)
+      loser = {1 => 0, 0 => 1}
+      "#{kudomon_to_fight[loser[winner]].hunter} won with #{kudomon_to_fight[loser[winner]].species}"
     end
 end
