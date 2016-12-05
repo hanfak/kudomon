@@ -43,9 +43,6 @@ describe MultiplayerCaptureController do
     end
   end
 
-  describe '#add_trainers' do
-  end
-
   describe '#initiate_capture' do
     it 'calls #stores_hunter' do
       capture_ctlr.spot_kudomon(trainer_1)
@@ -94,7 +91,6 @@ describe MultiplayerCaptureController do
         expect(trainer_2).to receive(:remove)
         capture_ctlr.capture(trainer_2)
       end
-
     end
 
     context 'does not capture not hunted kudomon' do

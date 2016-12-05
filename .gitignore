@@ -10,6 +10,8 @@
 /test/version_tmp/
 /tmp/
 notes.md
+app.rb
+app1.rb
 
 # Used by dotenv library to load environment variables.
 # .env

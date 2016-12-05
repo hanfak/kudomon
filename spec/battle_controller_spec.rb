@@ -9,7 +9,6 @@ describe BattleController do
   let(:trainer_1) {double :Trainer, name: "han", captured_kudomons: [sourbulb, mancharred]}
   let(:trainer_2) {double :Trainer, name: "bobby", captured_kudomons: [chikapu,dodo]}
 
-
   describe '#initialize' do
     it 'has trainers to fight' do
       expect(battle_ctrl.trainers).to eq [trainer_1, trainer_2]
@@ -52,7 +51,7 @@ describe BattleController do
       allow(Kernel).to receive(:rand).and_return(1)
       allow(sourbulb).to receive(:reduce_health).and_return(8,6,4,2,0)
       allow(chikapu).to receive(:reduce_health).and_return(8,6,4,2,0)
-      4.times {battle_ctrl.fight} 
+      4.times {battle_ctrl.fight}
       allow(sourbulb).to receive(:health_points).and_return(0)
 
       expect(battle_ctrl.fight).to eq 'bobby won with chikapu'

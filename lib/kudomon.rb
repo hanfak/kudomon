@@ -1,7 +1,13 @@
 class Kudomon
   attr_reader :species, :type, :position, :hunter, :health_points, :combat_points
 
-  WEAKNESS = {water: [:fire, :psychic], fire: [:grass, :psychic], grass: [:rock, :psychic], rock: [:electric, :psychic], electric: [:water, :psychic]}
+  STRENGTH_WEAKNESS = {water: [:fire, :psychic],
+                      fire: [:grass, :psychic],
+                      grass: [:rock, :psychic],
+                      rock: [:electric, :psychic],
+                      electric: [:water, :psychic]}
+  BONUS_HIT = 2
+  NORMAL_HIT = 1
 
   def initialize(species, type, geospace, health_points, combat_points)
     @species        = species
@@ -16,9 +22,7 @@ class Kudomon
   end
 
   def attack(kudomon)
-    # p WEAKNESS[type].include? kudomon.type
-    power_up = WEAKNESS[type].include?(kudomon.type) ? 2 : 1
-    # p power_up
+    power_up = STRENGTH_WEAKNESS[type].include?(kudomon.type) ? BONUS_HIT : NORMAL_HIT
     kudomon.reduce_health(power_up)
   end
 

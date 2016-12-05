@@ -53,12 +53,12 @@ describe Kudomon do
 
   describe "#reduce_health" do
     it 'reduces health points' do
-      kudomon.reduce_health(1)
+      kudomon.reduce_health(Kudomon::NORMAL_HIT)
       expect(kudomon.health_points).to eq 8
     end
 
     it 'reduces health points by bonus' do
-      kudomon.reduce_health(2)
+      kudomon.reduce_health(Kudomon::BONUS_HIT)
       expect(kudomon.health_points).to eq 6
     end
   end
