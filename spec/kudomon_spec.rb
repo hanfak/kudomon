@@ -5,6 +5,7 @@ describe Kudomon do
 
   let(:trainer_1) {double :Trainer, name: "Han"}
   let(:chikapu) {double :Kudomon,  type: :electric, health_points: 10, combat_points: 2, attack: nil}
+  let(:titan) {double :Kudomon,  type: :rock, health_points: 10, combat_points: 2, attack: nil}
 
   describe "#initialize" do
     it 'has a species' do
@@ -40,15 +41,25 @@ describe Kudomon do
 
   describe "#attack" do
     it 'attacks other kudomon' do
-      expect(chikapu).to receive(:reduce_health)
+      expect(chikapu).to receive(:reduce_health).with(1)
       kudomon.attack(chikapu)
+    end
+
+    it 'attacks with special attacks' do
+      expect(titan).to receive(:reduce_health).with(2)
+      kudomon.attack(titan)
     end
   end
 
   describe "#reduce_health" do
     it 'reduces health points' do
-      kudomon.reduce_health
+      kudomon.reduce_health(1)
       expect(kudomon.health_points).to eq 8
+    end
+
+    it 'reduces health points by bonus' do
+      kudomon.reduce_health(2)
+      expect(kudomon.health_points).to eq 6
     end
   end
 end
