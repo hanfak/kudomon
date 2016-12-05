@@ -5,7 +5,7 @@ Credit Kudos' Technical Challenge.
 
 I decided to tackle this program as a Ruby command line game, to be played in pry or irb (if more time would create runner with user interface to run the game).
 
-The creation of this project was done using TDD, using Rspec as the testing framework. I used doubles and mocks to keep unit tests focused on the class in question.
+The creation of this project was done using TDD and a 100% test coverage, using Rspec as the testing framework. I used doubles and mocks to keep unit tests focused on the class in question.
 
 ### Location of trainers and kudomons
 
@@ -48,6 +48,8 @@ Yes there are isssues with players the same distance from the same kudomon, but 
 Ruby 2.2.3
 Rspec
 Pry
+coveralls (for test coverage)
+simplecov (for test report)
 
 ## Excute
 
@@ -101,14 +103,11 @@ ctrl.capture(trainer_2)
 
 #Can repeat all the capture process until none left
 
-#To battle
+#To battle, make sure two players have captured at least one kudomon each
 #Choose which random kudomons to fight with
 battle_ctrl.pick_kudomons
 
-#Sort who goes first
-battle_ctrl.choose_order
-
-#fight
+#fight as many times until winner is declared
 battle_ctrl.fight
 ```
 

@@ -18,6 +18,6 @@ class Kudomon
   end
 
   def reduce_health
-    @health_points -= combat_points
+    @health_points -= @combat_points
   end
 end

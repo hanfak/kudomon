@@ -1,10 +1,10 @@
 describe Kudomon do
   let(:space) {double :Geospace, random_position: [1,1]}
 
-  subject(:kudomon) { described_class.new( "Sourbulb" , "grass", space, 10, 2) }
+  subject(:kudomon) { described_class.new( "Sourbulb" , :grass, space, 10, 2) }
 
   let(:trainer_1) {double :Trainer, name: "Han"}
-  let(:chikapu) {double :Kudomon,  type: "electric", health_points: 10, combat_points: 2, attack: nil}
+  let(:chikapu) {double :Kudomon,  type: :electric, health_points: 10, combat_points: 2, attack: nil}
 
   describe "#initialize" do
     it 'has a species' do
@@ -12,7 +12,7 @@ describe Kudomon do
     end
 
     it 'has a type' do
-      expect(kudomon.type).to eq "grass"
+      expect(kudomon.type).to eq :grass
     end
 
     it 'has health points' do

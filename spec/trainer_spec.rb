@@ -4,9 +4,9 @@ describe Trainer do
 
   subject(:trainer) { described_class.new( "Han", space ) }
 
-  let(:sourbulb) {double :Kudomon, name: :a, position: [4,5]}
-  let(:chikapu) {double :Kudomon, name: :b, position: [6, 7]}
-  let(:mancharred) {double :Kudomon, name: :c, position: [9,9]}
+  let(:sourbulb) {double :Kudomon,  position: [4,5]}
+  let(:chikapu) {double :Kudomon,  position: [6, 7]}
+  let(:mancharred) {double :Kudomon, position: [9,9]}
   let(:kudomons) {double :Kudomons, available_kudomons: [ chikapu, sourbulb, mancharred], remove: nil}
 
   describe "#initialize" do
@@ -23,7 +23,7 @@ describe Trainer do
   end
 
   describe "#find_closest_kudomon" do
-    let(:pikabu) {double :Kudomon, name: :d, position: [6, 7]}
+    let(:pikabu) {double :Kudomon, position: [6, 7]}
     let(:empty_kudomons) {double :Kudomons, available_kudomons: []}
     let(:same_kudomons) {double :Kudomons, available_kudomons: [ pikabu, chikapu]}
 

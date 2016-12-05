@@ -1,5 +1,6 @@
 class Geospace
   attr_reader :taken_positions
+  
   DEFAULT_POSITION_RANGE = [10, 10]
 
   def initialize( max_size = DEFAULT_POSITION_RANGE)
