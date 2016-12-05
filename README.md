@@ -40,7 +40,16 @@ Yes there are isssues with players the same distance from the same kudomon, but 
 
 ## Completed
 
+- Part 1: Setup classes for trainers and kudomons
+- Part 2: a trainer can capture a kudomon, store kudomons in an object, extracted spacial behaviours to geospace
+- Part 3: multiple trainers can capture kudomons
+- Part 4: Can fight other trainer's kudomons, with fixed hits
+
 ## To Do
+
+- Part 4: Include kudomon's weakness in attacking
+- User interface, instead of typing in pry or other REPLs, a program is run that guides the user instead of typing out the full commands etc
+- Make it into a rails app, store the kudomons and trainers in database, visual/gui interface
 
 
 ## Technology
