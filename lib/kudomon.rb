@@ -16,7 +16,7 @@ class Kudomon
   end
 
   def attack(kudomon)
-    p WEAKNESS[type].include? kudomon.type
+    # p WEAKNESS[type].include? kudomon.type
     power_up = WEAKNESS[type].include?(kudomon.type) ? 2 : 1
     # p power_up
     kudomon.reduce_health(power_up)

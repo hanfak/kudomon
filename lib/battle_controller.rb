@@ -16,9 +16,12 @@ class BattleController
   def fight
     kudomon_to_fight = choose_order
     kudomon_to_fight[0].attack(kudomon_to_fight[1])
+    if kudomon_to_fight[1].health_points <= 0
+      return "#{kudomon_to_fight[0].hunter} won with #{kudomon_to_fight[0].species}"
+    end
     kudomon_to_fight[1].attack(kudomon_to_fight[0])
-    if kudomon_to_fight[1].health_points == 0
-      "#{kudomon_to_fight[0].hunter} won"
+    if kudomon_to_fight[0].health_points <= 0
+      return "#{kudomon_to_fight[1].hunter} won with #{kudomon_to_fight[1].species}"
     end
   end
 
