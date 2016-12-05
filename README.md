@@ -1,6 +1,119 @@
 # Kudomon GO!
 Credit Kudos' Technical Challenge.
 
+## Approach
+
+I decided to tackle this program as a Ruby command line game, to be played in pry or irb (if more time would create runner with user interface to run the game).
+
+The creation of this project was done using TDD, using Rspec as the testing framework. I used doubles and mocks to keep unit tests focused on the class in question.
+
+### Location of trainers and kudomons
+
+I decided to use a 2 dimensional grid to place the actors on it. I then set each trainer's and kudomon's position as a random location on this grid (geospace). Also made sure that no two actors occupied the same space.
+
+I chose to use whole numbers for the grid locations, this was to keep calculations simple, later on can use decimals/floats to represent exact location.
+
+### Nearby kudomons
+
+I decided to make the choice for the player with who they can attempt to capture. I did this by finding the shortest path(using Pythagoras' theorem) from the trainer and the kudomons, and this becomes the target to capture.
+
+### Who gets the kudomon first
+
+I decided to have another action (initiate capture) to prevent simultaneous captures. This was done, by the user having to initiate first, and pick the correct number to complete the initiatlising. Once initialized, the trainer could capture it while other trainers could not capture this kudomon.
+
+## Issues
+
+If a trainer wishes to catch another kudomon after being denied initiating capture to lock that kudomon down, it cannot choose the next closest kudomon. It must wait until the trainer captures it, or it has another chance to initiate capture after the other trainer fails to intiate capture.
+
+I decide to avoid a trainer moving and fixed it's location. This would have solved the problems of the above issue in terms of choosing another kudomon to spot. I did this avoid more complexity at the time, and would be feature to add later on, I felt it was not necessary for an MVP.
+
+I decided not to return a list of closest kudomon, that the player has an option to initiate capture. The player can only focus on the closest kudomon at a time. This would avoid conflicts of players going after the same kudomon.
+
+### Simultaneous captures
+
+To avoid issues of simultaneous captures, I decided to add the following:
+  - Add an initiate capture stage, which involved locking the kudomon to the trainer, until captured.
+  - Having variable tries to initiate capture, by matching a random number (later good be a game, similar to how players in the real game have to swipe up etc).
+  - No two trainers can occupy the same spot, which reduced the chances of matching the same kudomon when spotting one.
+
+Yes there are isssues with players the same distance from the same kudomon, but adding a delaying in the initate capture stage, will help prevent this, plus influence players to think they have to do something banal to get it done.
+
+## Completed
+
+## To Do
+
+
+## Technology
+
+Ruby 2.2.3
+Rspec
+Pry
+
+## Excute
+
+1. clone repo
+2. enter directory of repo
+3. type `bundle install`
+4. type 'rspec' to run tests
+
+# Example of how to play
+
+Enter pry and copy and paste the following code
+
+```
+#import files
+require './lib/kudomon.rb'
+require './lib/trainer.rb'
+require './lib/kudomons.rb'
+require './lib/geospace.rb'
+require './lib/multiplayer_capture_controller.rb'
+require './lib/batte_controler.rb'
+
+#setup, can change name in trainer
+space = Geospace.new
+trainer_1 = Trainer.new("han", space)
+trainer_2 = Trainer.new("arya", space)
+kudomons = Kudomons.new
+
+# Can add more kudomons
+kudomons.add_kudomon Kudomon.new( "Sourbulb" , "grass", space, 10 , 2 )
+kudomons.add_kudomon Kudomon.new( "pikabu" , "electric", space, 10 , 2  )
+
+
+ctrl = MultiplayerCaptureController.new(kudomons, trainer_1, trainer_2)
+battle_ctrl = BattleController.new(trainer_1,trainer_2)
+
+#Find kudomon
+ctrl.spot_kudomon(trainer_1)
+
+# Begin capture, choose different numbers from 1 to 5
+# May have to repeat several times to intiiate capture
+ctrl.initiate_capture(trainer_1, 2)
+
+# Once initiated, can capture
+ctrl.capture(trainer_1)
+
+#For player 2
+
+ctrl.spot_kudomon(trainer_2)
+ctrl.initiate_capture(trainer_2, 4)
+ctrl.capture(trainer_2)
+
+#Can repeat all the capture process until none left
+
+#To battle
+#Choose which random kudomons to fight with
+battle_ctrl.pick_kudomons
+
+#Sort who goes first
+battle_ctrl.choose_order
+
+#fight
+battle_ctrl.fight
+```
+
+# The Task
+
 ## What is this challenge for?
 We want to understand the way you think about problems, and how you write code to tackle them. We’re not looking for the most efficient algorithmics, we’re looking for the simplest solution. We’re not going to give much in the way of guidance as to the specifics of implementation - if you think a model needs an attribute or a method, you go ahead and do it. You’re in charge.
 
@@ -43,7 +156,7 @@ At the exact same time, my neighbour Freddy sees the same Kudomon and also tries
 Freddy succeeds and adds the Kudomon to his collection before I’ve finished catching it.
 I now feel sad.
 
-How can we avoid this situation? 
+How can we avoid this situation?
 
 Now imagine instead of just two people, it’s now 1000 people cramming into Central Park to catch the same Kudomon - would the same solution work then?
 
